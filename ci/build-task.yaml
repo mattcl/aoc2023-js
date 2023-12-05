@@ -1,0 +1,18 @@
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    # the docker image to use
+    repository: oven/bun
+    tag: 1
+
+inputs:
+  # this repository will be provided to the task in the registry-image as a
+  # directory named `repo`
+  - name: repo
+
+output:
+  - name: release
+
+run:
+  path: repo/ci/scripts/build.sh
