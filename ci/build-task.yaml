@@ -15,4 +15,5 @@ outputs:
   - name: release
 
 run:
-  path: repo/ci/scripts/build.sh
+  dir: repo
+  path: ci/scripts/build.sh
