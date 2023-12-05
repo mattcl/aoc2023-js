@@ -1,3 +1,6 @@
+#!/bin/bash
+set -ex
+
 bun install
 
 bun build index.ts --compile --outfile mattcl-aoc2023-js
