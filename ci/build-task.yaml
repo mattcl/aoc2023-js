@@ -4,7 +4,7 @@ image_resource:
   source:
     # the docker image to use
     repository: oven/bun
-    tag: 1
+    tag: debian
 
 inputs:
   # this repository will be provided to the task in the registry-image as a
