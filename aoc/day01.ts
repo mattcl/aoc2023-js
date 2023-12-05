@@ -15,23 +15,23 @@ function matchLine(start: number, line: string): number | undefined {
   const first = line.charAt(start);
   if (first in DIGIT_MAP) {
     return DIGIT_MAP[first];
-  } else if (line.startsWith("one")) {
+  } else if (line.startsWith("one", start)) {
     return 1;
-  } else if (line.startsWith("two")) {
+  } else if (line.startsWith("two", start)) {
     return 2;
-  } else if (line.startsWith("three")) {
+  } else if (line.startsWith("three", start)) {
     return 3;
-  } else if (line.startsWith("four")) {
+  } else if (line.startsWith("four", start)) {
     return 4;
-  } else if (line.startsWith("five")) {
+  } else if (line.startsWith("five", start)) {
     return 5;
-  } else if (line.startsWith("six")) {
+  } else if (line.startsWith("six", start)) {
     return 6;
-  } else if (line.startsWith("seven")) {
+  } else if (line.startsWith("seven", start)) {
     return 7;
-  } else if (line.startsWith("eight")) {
+  } else if (line.startsWith("eight", start)) {
     return 8;
-  } else if (line.startsWith("nine")) {
+  } else if (line.startsWith("nine", start)) {
     return 9;
   }
 }

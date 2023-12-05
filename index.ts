@@ -31,3 +31,4 @@ function solve() {
 
 const solution = solve();
 console.log(JSON.stringify(solution));
+exit(0)
