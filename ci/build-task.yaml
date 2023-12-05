@@ -11,7 +11,7 @@ inputs:
   # directory named `repo`
   - name: repo
 
-output:
+outputs:
   - name: release
 
 run:
