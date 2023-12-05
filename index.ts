@@ -4,7 +4,7 @@ import { Day02 } from './aoc/day02';
 
 // This is stupid, but it's not like I know how this stuff works
 const day = parseInt(process.env.AOC_DAY || "-1");
-const inputPath = process.env.AOC_INPUT || exit(1);
+const inputPath = process.env.AOC_INPUT;
 const inputFile = Bun.file(inputPath);
 const input = await inputFile.text();
 
