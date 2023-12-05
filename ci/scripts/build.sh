@@ -3,7 +3,7 @@ set -ex
 
 bun install
 
-bun build index.ts --compile --outfile mattcl-aoc2023-js
+bun build index.ts --compile --target bun --outfile mattcl-aoc2023-js
 
 # step out of the repo dir
 cd ../
