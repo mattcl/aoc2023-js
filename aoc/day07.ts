@@ -110,7 +110,6 @@ class Hand {
     this.joker_kind = kinds[1];
     this.bid = bid;
   }
-
 }
 
 class Day07 {
@@ -135,13 +134,7 @@ class Day07 {
         return 1;
       }
 
-      if (a.cards < b.cards) {
-        return -1;
-      } else if (a.cards > b.cards) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return a.cards.localeCompare(b.cards)
     });
 
     let sum = 0;
@@ -159,13 +152,7 @@ class Day07 {
         return 1;
       }
 
-      if (a.joker_cards < b.joker_cards) {
-        return -1;
-      } else if (a.joker_cards > b.joker_cards) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return a.joker_cards.localeCompare(b.joker_cards)
     });
 
     let sum = 0;
