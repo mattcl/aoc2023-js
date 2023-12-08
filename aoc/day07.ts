@@ -10,7 +10,7 @@ const CARD_MAP = {
     8: 'H',
     9: 'I',
     T: 'J',
-    J: 'K',
+    J: JOKER,
     Q: 'L',
     K: 'M',
     A: 'N',
@@ -26,11 +26,16 @@ const FIVE_KIND = 6;
 
 function hand_kinds(cards: number[]): number[] {
   const counts = new Map();
+  let maximum = 0;
   for (const c of cards) {
     if (!counts.has(c)) {
       counts.set(c, 0);
     }
-    counts.set(c, 1 + counts.get(c));
+    const v = 1 + counts.get(c);
+    counts.set(c, v);
+    if (v > maximum) {
+      maximum = v;
+    }
   }
 
   const joker_count = counts.has(JOKER) ? counts.get(JOKER) : 0;
@@ -49,67 +54,58 @@ function hand_kinds(cards: number[]): number[] {
   }
 
   if (num === 2) {
-    for (const [_, value] of counts) {
-      if (value === 4 || value === 1) {
-        if (joker_count > 0) {
-          return [FOUR_KIND, FIVE_KIND];
-        } else {
-          return [FOUR_KIND, FOUR_KIND];
-        }
-      } else if (value === 2 || value === 3) {
-        if (joker_count > 0) {
-          return [FULL_HOUSE, FIVE_KIND];
-        } else {
-          return [FULL_HOUSE, FULL_HOUSE];
-        }
-      }
-    }
-  }
-
-  let num_pairs = 0;
-  for (const [_, value] of counts) {
-    if (value === 3) {
-      if (joker_count === 1 || joker_count === 3) {
-        return [THREE_KIND, FOUR_KIND];
+    if (maximum === 4) {
+      if (joker_count > 0) {
+        return [FOUR_KIND, FIVE_KIND];
       } else {
-        return [THREE_KIND, THREE_KIND];
+        return [FOUR_KIND, FOUR_KIND];
+      }
+    } else {
+      if (joker_count > 0) {
+        return [FULL_HOUSE, FIVE_KIND];
+      } else {
+        return [FULL_HOUSE, FULL_HOUSE];
       }
     }
+  }
 
-    if (value === 2) {
-      num_pairs += 1;
+  if (maximum === 3) {
+    if (joker_count > 0) {
+      return [THREE_KIND, FOUR_KIND];
+    } else {
+      return [THREE_KIND, THREE_KIND];
     }
   }
 
-  if (num_pairs === 2) {
-    switch(joker_count) {
-      case 1:
-        return [TWO_PAIR, FULL_HOUSE];
-      case 2:
-        return [TWO_PAIR, FOUR_KIND];
-      default:
-        return [TWO_PAIR, TWO_PAIR];
+  if (num === 4) {
+    if (joker_count > 0) {
+      return [ONE_PAIR, THREE_KIND];
+    } else {
+      return [ONE_PAIR, ONE_PAIR];
     }
   }
 
-  if (joker_count > 0) {
-    return [ONE_PAIR, THREE_KIND];
-  } else {
-    return [ONE_PAIR, ONE_PAIR];
+  switch(joker_count) {
+    case 1:
+      return [TWO_PAIR, FULL_HOUSE];
+    case 2:
+      return [TWO_PAIR, FOUR_KIND];
+    default:
+      return [TWO_PAIR, TWO_PAIR];
   }
 }
 
 class Hand {
   kind: number;
-  cards: number[];
+  cards: string;
   joker_kind: number;
-  joker_cards: number[];
+  joker_cards: string;
   bid: number;
 
   constructor(cards: number[], bid: number) {
-    this.cards = cards;
-    this.joker_cards = cards.map(card => card === JOKER ? 'A' : card);
-    const kinds = hand_kinds(this.cards);
+    const kinds = hand_kinds(cards);
+    this.cards = cards.join('');
+    this.joker_cards = this.cards.replaceAll(JOKER, 'A')
     this.kind = kinds[0];
     this.joker_kind = kinds[1];
     this.bid = bid;
