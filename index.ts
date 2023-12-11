@@ -7,6 +7,7 @@ import { Day06 } from './aoc/day06';
 import { Day07 } from './aoc/day07';
 import { Day08 } from './aoc/day08';
 import { Day09 } from './aoc/day09';
+import { Day10 } from './aoc/day10';
 
 // This is stupid, but it's not like I know how this stuff works
 const day = parseInt(process.env.AOC_DAY || "-1");
@@ -74,6 +75,13 @@ function solve() {
     }
     case 9: {
       const solver = new Day09(input);
+      return {
+        part_one: solver.partOne(),
+        part_two: solver.partTwo(),
+      };
+    }
+    case 10: {
+      const solver = new Day10(input);
       return {
         part_one: solver.partOne(),
         part_two: solver.partTwo(),
